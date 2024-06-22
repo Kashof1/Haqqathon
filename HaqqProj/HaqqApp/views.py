@@ -25,7 +25,7 @@ class RefugeeSignupView(FormView):
         return super().form_valid(form)
 class HomeView(FormView):
     template_name = 'home.html'
-    form_class = SkillSearchForm
+    form_class = SkillSearchFormHaqq
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
