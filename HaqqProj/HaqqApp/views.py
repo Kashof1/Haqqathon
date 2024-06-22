@@ -2,6 +2,13 @@ from django.shortcuts import render, redirect
 from django.views.generic import FormView, TemplateView
 from .forms import EmployerSignUpForm, RefugeeSignUpForm, SkillSearchForm
 from .models import Employer, Refugee
+from HaqqApp.core.utils import find_keys, get_score
+import os
+import json
+
+#defining path for labels stored in core/labels.json for use in the HomeView
+pathtolabels = os.path.join('HaqqApp', 'core', 'labels.json')
+
 
 class EmployerSignupView(FormView):
     template_name = 'employer_signup.html'
@@ -34,11 +41,22 @@ class HomeView(FormView):
         return context
 
     def post(self, request, *args, **kwargs):
-        print("POSTED")
+        with open(pathtolabels, 'r') as f:
+            labels = json.load(f)
+
         form = SkillSearchForm(request.POST)
         if form.is_valid():
-            skill = form.cleaned_data['skill']
-            refugees = Refugee.objects.filter(skills__icontains=skill)
-            print('refugees ', refugees)
+            targetSkill = form.cleaned_data['skill']
+            refugees = Refugee.objects.all()
+
+            refugeescores = []
+            for each in refugees:
+                eachSkills = each.skills
+                score = get_score(skills=eachSkills, target=targetSkill, data=labels)
+                refugeescores.append([each, score])
+
+            sortedRefugees = sorted(refugeescores, key=lambda x: x[1], reverse=False)[:5] #top 5 refugee matches
+            print(sortedRefugees)
+
             return self.render_to_response(self.get_context_data(form=form, refugees=refugees))
         return self.render_to_response(self.get_context_data(form=form))
