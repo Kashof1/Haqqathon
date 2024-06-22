@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+    {% block title %}Refugee Signup{% endblock %}
+
+{%  block content %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <h2>Refugee Signup</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div class="dropdown mt-3">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Select Skill
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="#">Skill 1</a>
+                    <a class="dropdown-item" href="#">Skill 2</a>
+                    <a class="dropdown-item" href="#">Skill 3</a>
+                </div>
+        </div>
+        <button class="clear">Clear</button>
+        <button type="submit">Signup</button>
+    </form>
+    <script>
+        $(document).ready(function() {
+            $('.dropdown-item').on('click', function(e) {
+                e.preventDefault();
+                let selectedSkill = $(this).text();
+                console.log(selectedSkill);
+
+                // Append the selected skill to the read-only input field
+                let readOnlyField = $('#id_skills');
+                let currentSkills = readOnlyField.val();
+
+                // Count the number of commas in the current skills field
+                let commaCount = (currentSkills.match(/,/g) || []).length;
+
+                // Check if there are already 2 commas
+                if (commaCount < 2) {
+                    if (currentSkills) {
+                        readOnlyField.val(currentSkills + ', ' + selectedSkill);
+                    } else {
+                        readOnlyField.val(selectedSkill);
+                    }
+                } else {
+                    alert('You can only add up to 3 skills.');
+                }
+            });
+        });
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            $('.clear').on('click', function(e) {
+                e.preventDefault();
+                // Append the selected skill to the read-only input field
+                let readOnlyField = $('#id_skills');
+                readOnlyField.val('');
+            });
+        });
+    </script>
+
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+    <div class="container mt-5">
+        <h1>Search for Refugees by Skill</h1>
+        <form method="post" action="">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div class="dropdown mt-3">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Select Skill
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="#">Skill 1</a>
+                    <a class="dropdown-item" href="#">Skill 2</a>
+                    <a class="dropdown-item" href="#">Skill 3</a>
+                </div>
+        </div>
+            <button type="submit" class="btn btn-primary mt-3">Search</button>
+        </form>
+
+        <h2 class="mt-5">Refugees with the specified skill</h2>
+        <ul>
+            {% if refugees %}
+                {% for refugee in refugees %}
+                    <li>{{ refugee.first_name }} {{ refugee.last_name }} - Skills: {{ refugee.skills }}</li>
+                {% endfor %}
+            {% else %}
+                <p>No refugees found with that skill.</p>
+            {% endif %}
+        </ul>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            $('.dropdown-item').on('click', function(e) {
+                e.preventDefault();
+                let selectedSkill = $(this).text();
+                $('#id_skill').val(selectedSkill);
+            });
+        });
+    </script>
+{% endblock %}
