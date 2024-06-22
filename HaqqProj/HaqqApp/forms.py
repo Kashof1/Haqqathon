@@ -4,7 +4,7 @@ from .models import Employer, Refugee
 class EmployerSignUpForm(forms.ModelForm):
     class Meta:
         model = Employer
-        fields = ['first_name', 'last_name', 'email',]
+        fields = ['first_name', 'last_name', 'email']
 
 
 class RefugeeSignUpForm(forms.ModelForm):

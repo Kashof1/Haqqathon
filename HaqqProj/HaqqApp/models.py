@@ -5,6 +5,9 @@ class Employer(models.Model):
     last_name = models.CharField(max_length=50)
     email = models.EmailField()
 
+    def __str__(self):
+        return f"{self.first_name} {self.last_name}"
+
 class Refugee(models.Model):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
@@ -16,3 +19,6 @@ class Refugee(models.Model):
 
     def set_skills(self, skills):
         self.skills = ','.join(skills)
+
+    def __str__(self):
+        return f"{self.first_name} {self.last_name}"
