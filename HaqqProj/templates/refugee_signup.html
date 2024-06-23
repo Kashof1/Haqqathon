@@ -1,31 +1,269 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
 
     {% block title %}Refugee Signup{% endblock %}
 
 {%  block content %}
+    <br>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <h2>Refugee Signup</h2>
     <form method="post">
         {% csrf_token %}
-        {{ form.as_p }}
-        <div class="dropdown mt-3">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Select Skill
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="#">Skill 1</a>
-                    <a class="dropdown-item" href="#">Skill 2</a>
-                    <a class="dropdown-item" href="#">Skill 3</a>
-                </div>
-        </div>
+        {{ form|crispy }}
+   <div class="container mt-4">
+    <h1>Main Industry Categories</h1>
+
+    <ul class="list-unstyled">
+      <!-- Agriculture -->
+      <li class="dropdown-submenu">
+        <button class="btn btn-primary dropdown-toggle mb-2" type="button" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">Agriculture</button>
+        <ul class="dropdown-menu">
+          <!-- Physical -->
+          <li class="dropdown-submenu">
+            <button class="dropdown-item dropdown-toggle" type="button" data-bs-toggle="dropdown" >Physical</button>
+            <ul class="dropdown-menu">
+              <li><button class="dropdown-item-final" type="button">Farm Laborer</button></li>
+              <li><button class="dropdown-item-final" type="button">Herder</button></li>
+              <li><button class="dropdown-item-final" type="button">Field Worker</button></li>
+            </ul>
+          </li>
+          <!-- Harvesting -->
+          <li class="dropdown-submenu">
+            <button class="dropdown-item dropdown-toggle" type="button" data-bs-toggle="dropdown">Harvesting</button>
+            <ul class="dropdown-menu">
+              <li><button class="dropdown-item-final" type="button">Fruit Picker</button></li>
+              <li><button class="dropdown-item-final" type="button">Vegetable Harvester</button></li>
+              <li><button class="dropdown-item-final" type="button">Crop Collector</button></li>
+            </ul>
+          </li>
+          <!-- Maintenance -->
+          <li class="dropdown-submenu">
+            <button class="dropdown-item dropdown-toggle" type="button" data-bs-toggle="dropdown">Maintenance</button>
+            <ul class="dropdown-menu">
+              <li><button class="dropdown-item-final" type="button">Irrigation Worker</button></li>
+              <li><button class="dropdown-item-final" type="button">Fence Repairer</button></li>
+              <li><button class="dropdown-item-final" type="button">Equipment Cleaner</button></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+
+      <!-- Services -->
+      <li class="dropdown-submenu">
+        <button class="btn btn-primary dropdown-toggle mb-2" type="button" data-bs-toggle="dropdown" data-bs-auto-close="outside">Services</button>
+        <ul class="dropdown-menu">
+          <!-- Cleaning -->
+          <li class="dropdown-submenu">
+            <button class="dropdown-item dropdown-toggle" type="button" data-bs-toggle="dropdown">Cleaning</button>
+            <ul class="dropdown-menu">
+              <li><button class="dropdown-item-final" type="button">Janitor</button></li>
+              <li><button class="dropdown-item-final" type="button">Window Cleaner</button></li>
+              <li><button class="dropdown-item-final" type="button">Street Sweeper</button></li>
+            </ul>
+          </li>
+          <!-- Food Service -->
+          <li class="dropdown-submenu">
+            <button class="dropdown-item dropdown-toggle" type="button" data-bs-toggle="dropdown">Food Service</button>
+            <ul class="dropdown-menu">
+              <li><button class="dropdown-item-final" type="button">Dishwasher</button></li>
+              <li><button class="dropdown-item-final" type="button">Kitchen Assistant</button></li>
+              <li><button class="dropdown-item-final" type="button">Fast Food Worker</button></li>
+            </ul>
+          </li>
+          <!-- Hospitality -->
+          <li class="dropdown-submenu">
+            <button class="dropdown-item dropdown-toggle" type="button" data-bs-toggle="dropdown">Hospitality</button>
+            <ul class="dropdown-menu">
+              <li><button class="dropdown-item-final" type="button">Housekeeper</button></li>
+              <li><button class="dropdown-item-final" type="button">Hotel Cleaner</button></li>
+              <li><button class="dropdown-item-final" type="button">Laundry Attendant</button></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+
+      <!-- Manufacturing -->
+      <li class="dropdown-submenu">
+        <button class="btn btn-primary dropdown-toggle mb-2" type="button" data-bs-toggle="dropdown" data-bs-auto-close="outside">Manufacturing</button>
+        <ul class="dropdown-menu">
+          <!-- Assembly -->
+          <li class="dropdown-submenu">
+            <button class="dropdown-item dropdown-toggle" type="button" data-bs-toggle="dropdown">Assembly</button>
+            <ul class="dropdown-menu">
+              <li><button class="dropdown-item-final" type="button">Assembler</button></li>
+              <li><button class="dropdown-item-final" type="button">Production Line Worker</button></li>
+              <li><button class="dropdown-item-final" type="button">Electronics Assembler</button></li>
+            </ul>
+          </li>
+          <!-- Packaging -->
+          <li class="dropdown-submenu">
+            <button class="dropdown-item dropdown-toggle" type="button" data-bs-toggle="dropdown">Packaging</button>
+            <ul class="dropdown-menu">
+              <li><button class="dropdown-item-final" type="button">Packer</button></li>
+              <li><button class="dropdown-item-final" type="button">Warehouse Worker</button></li>
+              <li><button class="dropdown-item-final" type="button">Box Assembler</button></li>
+            </ul>
+          </li>
+          <!-- Quality Control -->
+          <li class="dropdown-submenu">
+            <button class="dropdown-item dropdown-toggle" type="button" data-bs-toggle="dropdown">Quality Control</button>
+            <ul class="dropdown-menu">
+              <li><button class="dropdown-item-final" type="button">Inspector</button></li>
+              <li><button class="dropdown-item-final" type="button">Tester</button></li>
+              <li><button class="dropdown-item-final" type="button">Sorter</button></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+
+      <!-- Retail -->
+      <li class="dropdown-submenu">
+        <button class="btn btn-primary dropdown-toggle mb-2" type="button" data-bs-toggle="dropdown" data-bs-auto-close="outside">Retail</button>
+        <ul class="dropdown-menu">
+          <!-- Stocking -->
+          <li class="dropdown-submenu">
+            <button class="dropdown-item dropdown-toggle" type="button" data-bs-toggle="dropdown">Stocking</button>
+            <ul class="dropdown-menu">
+              <li><button class="dropdown-item-final" type="button">Shelf Stocker</button></li>
+              <li><button class="dropdown-item-final" type="button">Inventory Clerk</button></li>
+              <li><button class="dropdown-item-final" type="button">Stockroom Assistant</button></li>
+            </ul>
+          </li>
+          <!-- Customer Service -->
+          <li class="dropdown-submenu">
+            <button class="dropdown-item dropdown-toggle" type="button" data-bs-toggle="dropdown">Customer Service</button>
+            <ul class="dropdown-menu">
+              <li><button class="dropdown-item-final" type="button">Cashier</button></li>
+              <li><button class="dropdown-item-final" type="button">Store Greeter</button></li>
+              <li><button class="dropdown-item-final" type="button">Bagger</button></li>
+            </ul>
+          </li>
+          <!-- Maintenance -->
+          <li class="dropdown-submenu">
+            <button class="dropdown-item dropdown-toggle" type="button" data-bs-toggle="dropdown">Maintenance</button>
+            <ul class="dropdown-menu">
+              <li><button class="dropdown-item-final" type="button">Cart Collector</button></li>
+              <li><button class="dropdown-item-final" type="button">Store Cleaner</button></li>
+              <li><button class="dropdown-item-final" type="button">Maintenance Assistant</button></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+
+      <!-- Construction -->
+      <li class="dropdown-submenu">
+        <button class="btn btn-primary dropdown-toggle mb-2" type="button" data-bs-toggle="dropdown" data-bs-auto-close="outside">Construction</button>
+        <ul class="dropdown-menu">
+          <!-- Labor -->
+          <li class="dropdown-submenu">
+            <button class="dropdown-item dropdown-toggle" type="button" data-bs-toggle="dropdown">Labor</button>
+            <ul class="dropdown-menu">
+              <li><button class="dropdown-item-final" type="button">Construction Laborer</button></li>
+              <li><button class="dropdown-item-final" type="button">Masonry Helper</button></li>
+              <li><button class="dropdown-item-final" type="button">Demolition Worker</button></li>
+            </ul>
+          </li>
+          <!-- Site Maintenance -->
+          <li class="dropdown-submenu">
+            <button class="dropdown-item dropdown-toggle" type="button" data-bs-toggle="dropdown">Site Maintenance</button>
+            <ul class="dropdown-menu">
+              <li><button class="dropdown-item-final" type="button">Site Cleaner</button></li>
+              <li><button class="dropdown-item-final" type="button">Material Handler</button></li>
+              <li><button class="dropdown-item-final" type="button">Scaffold Erector</button></li>
+            </ul>
+          </li>
+          <!-- Basic Skills -->
+          <li class="dropdown-submenu">
+            <button class="dropdown-item dropdown-toggle" type="button" data-bs-toggle="dropdown">Basic Skills</button>
+            <ul class="dropdown-menu">
+              <li><button class="dropdown-item-final" type="button">Painter Assistant</button></li>
+              <li><button class="dropdown-item-final" type="button">Carpenter Helper</button></li>
+              <li><button class="dropdown-item-final" type="button">Plumber Helper</button></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+
+      <!-- Transportation and Logistics -->
+      <li class="dropdown-submenu">
+        <button class="btn btn-primary dropdown-toggle mb-2" type="button" data-bs-toggle="dropdown" data-bs-auto-close="outside">Transportation and Logistics</button>
+        <ul class="dropdown-menu">
+          <!-- Driving -->
+          <li class="dropdown-submenu">
+            <button class="dropdown-item dropdown-toggle" type="button" data-bs-toggle="dropdown">Driving</button>
+            <ul class="dropdown-menu">
+              <li><button class="dropdown-item-final" type="button">Delivery Driver</button></li>
+              <li><button class="dropdown-item-final" type="button">Courier</button></li>
+              <li><button class="dropdown-item-final" type="button">Van Driver</button></li>
+            </ul>
+          </li>
+          <!-- Loading and Unloading -->
+          <li class="dropdown-submenu">
+            <button class="dropdown-item dropdown-toggle" type="button" data-bs-toggle="dropdown">Loading and Unloading</button>
+            <ul class="dropdown-menu">
+              <li><button class="dropdown-item-final" type="button">Dock Worker</button></li>
+              <li><button class="dropdown-item-final" type="button">Freight Handler</button></li>
+              <li><button class="dropdown-item-final" type="button">Loader/Unloader</button></li>
+            </ul>
+          </li>
+          <!-- Inventory Management -->
+          <li class="dropdown-submenu">
+            <button class="dropdown-item dropdown-toggle" type="button" data-bs-toggle="dropdown">Inventory Management</button>
+            <ul class="dropdown-menu">
+              <li><button class="dropdown-item-final" type="button">Warehouse Worker</button></li>
+              <li><button class="dropdown-item-final" type="button">Inventory Assistant</button></li>
+              <li><button class="dropdown-item-final" type="button">Stock Controller</button></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+
+      <!-- Healthcare Support -->
+      <li class="dropdown-submenu">
+        <button class="btn btn-primary dropdown-toggle mb-2" type="button" data-bs-toggle="dropdown" data-bs-auto-close="outside">Healthcare Support</button>
+        <ul class="dropdown-menu">
+          <!-- Patient Assistance -->
+          <li class="dropdown-submenu">
+            <button class="dropdown-item dropdown-toggle" type="button" data-bs-toggle="dropdown">Patient Assistance</button>
+            <ul class="dropdown-menu">
+              <li><button class="dropdown-item-final" type="button">Nursing Aide</button></li>
+              <li><button class="dropdown-item-final" type="button">Orderly</button></li>
+              <li><button class="dropdown-item-final" type="button">Personal Care Assistant</button></li>
+            </ul>
+          </li>
+          <!-- Facility Maintenance -->
+          <li class="dropdown-submenu">
+            <button class="dropdown-item dropdown-toggle" type="button" data-bs-toggle="dropdown">Facility Maintenance</button>
+            <ul class="dropdown-menu">
+              <li><button class="dropdown-item-final" type="button">Hospital Cleaner</button></li>
+              <li><button class="dropdown-item-final" type="button">Laundry Attendant</button></li>
+              <li><button class="dropdown-item-final" type="button">Food Service Worker</button></li>
+            </ul>
+          </li>
+          <!-- Administrative Support -->
+          <li class="dropdown-submenu">
+            <button class="dropdown-item dropdown-toggle" type="button" data-bs-toggle="dropdown">Administrative Support</button>
+            <ul class="dropdown-menu">
+              <li><button class="dropdown-item-final" type="button">Medical Records Clerk</button></li>
+              <li><button class=dropdown-item-final" type="button">Receptionist</button></li>
+              <li><button class="dropdown-item-final" type="button">Office Assistant</button></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+
+  </div>
+        <br>
         <button class="clear">Clear</button>
         <button type="submit">Signup</button>
     </form>
     <script>
         $(document).ready(function() {
-            $('.dropdown-item').on('click', function(e) {
+            $('.dropdown-item-final').on('click', function(e) {
                 e.preventDefault();
                 let selectedSkill = $(this).text();
+                let possibleSkills = []
                 console.log(selectedSkill);
 
                 // Append the selected skill to the read-only input field

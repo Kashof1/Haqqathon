@@ -34,13 +34,21 @@ class HomeView(FormView):
     template_name = 'home.html'
     form_class = SkillSearchForm
 
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     context['form'] = SkillSearchForm()
+    #     context['refugees'] = None
+    #     return context
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['form'] = SkillSearchForm()
+        context['refugees'] = kwargs.get('refugees', None)
         context['refugees'] = None
         return context
 
     def post(self, request, *args, **kwargs):
+        context = super().get_context_data(**kwargs)
         with open(pathtolabels, 'r') as f:
             labels = json.load(f)
 
@@ -53,10 +61,22 @@ class HomeView(FormView):
             for each in refugees:
                 eachSkills = each.skills
                 score = get_score(skills=eachSkills, target=targetSkill, data=labels)
-                refugeescores.append([each, score])
+                if score == 1:
+                    rating = "Strong match"
+                elif score == 2:
+                    rating = "Mediocre match"
+                elif score == 3:
+                    rating = "Weak match"
+                else:
+                    rating = "No significant match"
+                refugeescores.append([each, rating, score])
 
-            sortedRefugees = sorted(refugeescores, key=lambda x: x[1], reverse=False)[:5] #top 5 refugee matches
-            print(sortedRefugees)
+            sortedRefugees = sorted(refugeescores, key=lambda x: x[2], reverse=False)[:5] #top 5 refugee matches
+            sortedRefugees = [each for each in sortedRefugees if each[2] != float('inf')]
+            context['refugees'] = sortedRefugees
+            print(f"sorted refugees : {sortedRefugees}")
+            print(f"context : {context['refugees']}")
 
-            return self.render_to_response(self.get_context_data(form=form, refugees=refugees))
-        return self.render_to_response(self.get_context_data(form=form))
+            #return self.render_to_response(self.get_context_data(form=form, refugees=sortedRefugees))
+        #return self.render_to_response(self.get_context_data(form=form))
+            return render(request, 'home.html', context)
